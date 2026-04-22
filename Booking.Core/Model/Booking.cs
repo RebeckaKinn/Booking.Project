@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Booking.Core.DomainService
+namespace Booking.Core.Model
 {
     internal class Booking
     {
