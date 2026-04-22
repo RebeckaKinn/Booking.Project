@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Booking.UI
+namespace BookingUI.AppService
 {
-    internal class BookingApp
+    internal class BookingService
     {
-        Console.writeLine()
     }
 }
