@@ -24,14 +24,10 @@ namespace BookingUI
             while (isRunning)
             {
                 Console.Clear();
-                ShowCurrentDay();
+                Console.WriteLine(GetCurrentDayString(_currentDate));
 
                 Console.WriteLine();
-                Console.WriteLine("[+] Neste dag");
-                Console.WriteLine("[-] Forrige dag");
-                Console.WriteLine("[B] Book time");
-                Console.WriteLine("[Q] Avslutt");
-                Console.Write("Valg: ");
+                Console.WriteLine(GetMenuItems());
 
                 var key = Console.ReadKey(intercept: true).Key;
 
@@ -42,21 +38,26 @@ namespace BookingUI
             }
         }
 
-        private void ShowCurrentDay()
+        private string GetMenuItems()
         {
-            Console.WriteLine($"Dato: {_currentDate:dd.MM.yyyy}");
-            Console.WriteLine();
+            return "[+] Neste dag\n" +
+                   "[-] Forrige dag\n" +
+                   "[B] Book time\n" +
+                   "[Q] Avslutt\n" +
+                   "Valg: ";
+        }
 
-            var hourStatuses = _bookingService.GetDayStatus(_currentDate);
-
-            foreach (var status in hourStatuses)
-            {
-                var statusText = status.IsAvailable
-                    ? "Ledig"
-                    : $"Opptatt  ({status.Description})";
-
-                Console.WriteLine($"{status.Hour:00}:00  {statusText}");
-            }
+        //CORE
+        private string GetCurrentDayString(DateOnly currentDate)
+        {
+            return $"Dato: {currentDate:dd.MM.yyyy}\n\n" +
+                   string.Join("\n", _bookingService.GetDayStatus(currentDate).Select(status =>
+                   {
+                       var statusText = status.IsAvailable
+                           ? "Ledig"
+                           : $"Opptatt  ({status.Description})";
+                       return $"{status.Hour:00}:00  {statusText}";
+                   }));
         }
     }
 }
