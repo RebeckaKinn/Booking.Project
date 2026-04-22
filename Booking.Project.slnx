@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="Booking.Console.UI/Booking.UI.csproj" />
   <Project Path="Booking.Core/Booking.Core.csproj" />
+  <Project Path="BookingUI/BookingUI.csproj" Id="bfa863cd-dc45-46be-8ff5-a8ba464a19f8" />
 </Solution>
