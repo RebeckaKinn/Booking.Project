@@ -1,6 +1,8 @@
-﻿using System;
+﻿using BookingUI.AppService;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using Booking.Core.DomainService;
 
 namespace BookingUI
 {
@@ -9,6 +11,7 @@ namespace BookingUI
         private readonly BookingService _bookingService;
         private readonly DateOnly _today;
         private DateOnly _currentDate;
+        private MenuData _menuData = new MenuData();
 
         public BookingApp()
         {
@@ -27,7 +30,7 @@ namespace BookingUI
                 Console.WriteLine(GetCurrentDayString(_currentDate));
 
                 Console.WriteLine();
-                Console.WriteLine(GetMenuItems());
+                Console.WriteLine(_menuData.GetMenuItems());
 
                 var key = Console.ReadKey(intercept: true).Key;
 
@@ -38,16 +41,7 @@ namespace BookingUI
             }
         }
 
-        private string GetMenuItems()
-        {
-            return "[+] Neste dag\n" +
-                   "[-] Forrige dag\n" +
-                   "[B] Book time\n" +
-                   "[Q] Avslutt\n" +
-                   "Valg: ";
-        }
 
-        //CORE
         private string GetCurrentDayString(DateOnly currentDate)
         {
             return $"Dato: {currentDate:dd.MM.yyyy}\n\n" +
